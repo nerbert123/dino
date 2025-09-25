@@ -20,12 +20,12 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install python-call-graph
+        pip install pycallgraph2
 
     - name: Run call graph generator
       run: |
         mkdir -p callgraph_output
-        python -m python_call_graph --output callgraph_output/graph.png main_dino.py
+        pycallgraph graphviz --output-file=callgraph_output/graph.png python main_dino.py
 
     - name: Upload call graph
       uses: actions/upload-artifact@v4
