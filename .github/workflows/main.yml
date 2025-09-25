@@ -1,0 +1,34 @@
+name: Generate Python Call Graph
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  callgraph:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: |
+        pip install python-call-graph
+
+    - name: Run call graph generator
+      run: |
+        mkdir -p callgraph_output
+        python -m python_call_graph --output callgraph_output/graph.png main_dino.py
+
+    - name: Upload call graph
+      uses: actions/upload-artifact@v3
+      with:
+        name: python-call-graph
+        path: callgraph_output/
