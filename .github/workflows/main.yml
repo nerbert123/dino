@@ -28,7 +28,7 @@ jobs:
         python -m python_call_graph --output callgraph_output/graph.png main_dino.py
 
     - name: Upload call graph
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: python-call-graph
         path: callgraph_output/
